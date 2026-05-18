@@ -15,8 +15,7 @@ def dns_lookup():
     domain = request.args.get("domain")
 
     result = subprocess.check_output(
-        f"nslookup {domain}",
-        shell=True
+        ["/usr/bin/nslookup", domain]
     )
 
     return result
