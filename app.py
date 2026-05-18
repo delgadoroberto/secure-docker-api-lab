@@ -1,6 +1,7 @@
 from flask import Flask, request
 import subprocess
 import os
+import re
 
 app = Flask(__name__)
 
@@ -13,6 +14,9 @@ def home():
 @app.route("/dns")
 def dns_lookup():
     domain = request.args.get("domain")
+
+    if not re.match(r'^[a-zA-Z0-9.-]+$', domain):
+        return "Invalid domain", 400
 
     result = subprocess.check_output(
         ["/usr/bin/nslookup", domain]
