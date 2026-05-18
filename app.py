@@ -1,9 +1,10 @@
 from flask import Flask, request
 import subprocess
+import os
 
 app = Flask(__name__)
 
-SECRET_TOKEN = "MY-TOP-SECRET-TOKEN"
+SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 
 @app.route("/")
 def home():
